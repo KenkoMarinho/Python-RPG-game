@@ -111,7 +111,7 @@ def EntrarNaDungeon(tabuleiro):
   tabuleiro[random.randint(0,10)][random.randint(0,14)]="o"
   return tabuleiro
 
-def main():
+def Dungeon_Crawling():
   tabuleiro=[
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
@@ -129,4 +129,3 @@ def main():
   while True:
     MostrarTabuleiro(tabuleiro)
     InputAutomatico(tabuleiro)
-main()
