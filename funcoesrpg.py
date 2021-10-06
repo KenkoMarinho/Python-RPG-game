@@ -521,7 +521,6 @@ def combate_random_melhorado(player,qntinimigos=0,inimigo1=0,inimigo2=0,inimigo3
   ArmazenarPlayer.expplayer=player.expplayer
   player=retonarplayer(ArmazenarPlayer)
 
-
 def encontro_aleatorio(player,qntinimigos=0,Inimigo1=0,Inimigo2=0,Inimigo3=0,Inimigo4=0):
   rand=random.randint(1,30)
   if rand>=1 and rand<=15 or qntinimigos==1:
@@ -537,41 +536,75 @@ def encontro_aleatorio(player,qntinimigos=0,Inimigo1=0,Inimigo2=0,Inimigo3=0,Ini
     qntinimigos=4
     playerhp,playermp,playerexp=combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2,Inimigo3,Inimigo4)
 
-
 def retonarplayer(player):
   objeto=obj_personagem.objpersonagem(player.nome,player.HP,player.MP,player.HPMax,player.MPMax,player.FOR,player.DES,player.CON,player.INT,player.SAB,player.CAR,player.DanoArma,player.ataquesmagicos,player.Defesa,player.DefesaMagica,player.imunidades,player.expplayer,player.explevelup,player.levelplayer,player.DanoFoco,player.armaelementalativa,player.dinheiro,player.grimorio,player.livrogolpes,player.mochila,player.tipoarmadura,player.tipoarma,player.tipoanel,player.tipoescudo,player.movimento1,player.movimento2,player.movimento3,player.movimento4,player.movimento5,player.movimento6,player.movimento7,player.movimento8,player.armaelementaltipodano)
   return objeto
 
+#as funções a seguir são referentes ao sistema de comércio com NPCs.
 def Comercio(player,comerciante=0):
-    if comerciante=0:
+    if comerciante==0:
         comerciante="Padrão"
     #Tipos de Comerciante:
     if comerciante=="Padrão":
         mercadorias=RandomizarMercadorias("Padrão")
         while True:
-            MostrarMercadorias(mercadorias)
+            MostrarMercadorias(mercadorias,comerciante,player)
             RealizarCompraOuFecharLoja(player,mercadorias)
+            teclado=input("Deseja comprar mais algo? Sim/Não")
+            teclado=teclado.upper()
+            while (teclado!="SIM" and teclado!="NÃO"):
+                teclado=input("Deseja comprar mais algo? Sim/Não")
+                teclado=teclado.upper()
+            if teclado=="NÃO":
+                break
     if comerciante=="Mercador Aventureiro":
         mercadorias=RandomizarMercadorias("Mercador Aventureiro")
         while True:
-            MostrarMercadorias(mercadorias)
+            MostrarMercadorias(mercadorias,comerciante,player)
             RealizarCompraOuFecharLoja(player,mercadorias)
+            teclado=input("Deseja comprar mais algo? Sim/Não")
+            teclado=teclado.upper()
+            while (teclado!="SIM" and teclado!="NÃO"):
+                teclado=input("Deseja comprar mais algo? Sim/Não")
+                teclado=teclado.upper()
+            if teclado=="NÃO":
+                break
     if comerciante=="Mercador Mago":
         mercadorias=RandomizarMercadorias("Mercador Mago")
         while True:
-            MostrarMercadorias(mercadorias)
+            MostrarMercadorias(mercadorias,comerciante,player)
             RealizarCompraOuFecharLoja(player,mercadorias)
+            teclado=input("Deseja comprar mais algo? Sim/Não")
+            teclado=teclado.upper()
+            while (teclado!="SIM" and teclado!="NÃO"):
+                teclado=input("Deseja comprar mais algo? Sim/Não")
+                teclado=teclado.upper()
+            if teclado=="NÃO":
+                break
     if comerciante=="Goblin Mercador":
         mercadorias=RandomizarMercadorias("Goblin Mercador")
         while True:
-            MostrarMercadorias(mercadorias)
+            MostrarMercadorias(mercadorias,comerciante,player)
             RealizarCompraOuFecharLoja(player,mercadorias)
+            teclado=input("Deseja comprar mais algo? Sim/Não")
+            teclado=teclado.upper()
+            while (teclado!="SIM" and teclado!="NÃO"):
+                teclado=input("Deseja comprar mais algo? Sim/Não")
+                teclado=teclado.upper()
+            if teclado=="NÃO":
+                break
     if comerciante=="Pequeno Mascate":
         mercadorias=RandomizarMercadorias("Pequeno Mascate")
         while True:
-            MostrarMercadorias(mercadorias)
+            MostrarMercadorias(mercadorias,comerciante,player)
             RealizarCompraOuFecharLoja(player,mercadorias)
-
+            teclado=input("Deseja comprar mais algo? Sim/Não")
+            teclado=teclado.upper()
+            while (teclado!="SIM" and teclado!="NÃO"):
+                teclado=input("Deseja comprar mais algo? Sim/Não")
+                teclado=teclado.upper()
+            if teclado=="NÃO":
+                break
 
 def RandomizarMercadorias(comerciante):
     if comerciante=="Padrão":
@@ -617,8 +650,8 @@ def RandomizarMercadorias(comerciante):
             mercadorias=["Adaga","Rapieira","Diamante"]
         if randomizar==4:
             mercadorias=["Adagas Gêmeas","Sobre-Tudo","Robes Desgastadas"]
-#lista de itens:
-#"Diamante","Rapieira","Armadura De Couro","Pérola","Espada Longa","Camisão De Malha","Diamante","Pérola","Espada Longa","Esmeralda","Barra De Ferro","Espada Dos Magos"
+    #lista de itens:
+    #"Diamante","Rapieira","Armadura De Couro","Pérola","Espada Longa","Camisão De Malha","Diamante","Pérola","Espada Longa","Esmeralda","Barra De Ferro","Espada Dos Magos"
     if comerciante=="Pequeno Mascate":
         randomizar=random.randint(1,4)
         if randomizar==1:
@@ -631,7 +664,7 @@ def RandomizarMercadorias(comerciante):
             mercadorias=["Esmeralda","Barra De Ferro","Espada Dos Magos"]
     return mercadorias
 
-def MostrarMercadorias(mercadorias,comerciante):
+def MostrarMercadorias(mercadorias,comerciante,player):
     if comerciante=="Padrão":
         print("O Logista então mostrava seus pertences...")
     if comerciante=="Mercador Aventureiro":
@@ -650,6 +683,7 @@ def MostrarMercadorias(mercadorias,comerciante):
     if len(mercadorias)>=3:
         print("3-",mercadorias[2])
     print("=======================")
+    print("Seu dinheiro:",player.dinheiro)
 
 def RealizarCompraOuFecharLoja(player,mercadorias):
     teclado=input("Digite o Número da mercadoria selecionada, ou aperte ENTER para sair da loja.")
@@ -657,32 +691,90 @@ def RealizarCompraOuFecharLoja(player,mercadorias):
         teclado=input("Digite o Número da mercadoria selecionada, ou aperte ENTER para sair da loja.")
     if teclado=="1":
         mercadoriaselecionada=mercadorias[0]
+        index=0
     elif teclado=="2":
         mercadoriaselecionada=mercadorias[1]
+        index=1
     elif teclado=="3":
         mercadoriaselecionada=mercadorias[2]
+        index=2
     elif teclado!="":
         RealizarCompraOuFecharLoja(player,mercadorias)
     if mercadoriaselecionada=="Diamante":
-        preco=500
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="": #Pelo amor d deus seta o preço desses itens comentados aí, vai.
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-    if mercadoriaselecionada=="":
-#Diamante Rapieira Armadura De Couro Pérola Espada Longa
-#Camisão De Malha Esmeralda Barra De Ferro Espada Dos Magos 
-#Adagas Gêmeas Sobre-Tudo Robes Desgastadas Adaga Espada Curta 
-#Corda Varinha De Visco Cajado Sagrado Varinha De Teixo Bolsa De Runas 
-#Cajado Besta Espada Larga Arco Cota De Malha Poção De MP Conjunto De Dados Picareta Poção De HP, Machado
+        preco=4900+random.randint(1,300)
+    if mercadoriaselecionada=="Rapieira":
+        preco=100+random.randint(1,20)
+    if mercadoriaselecionada=="Armadura De Couro":
+        preco=50+random.randint(1,20)
+    if mercadoriaselecionada=="Pérola":
+        preco=99+random.randint(1,20)
+    if mercadoriaselecionada=="Espada Longa":
+        preco=100+random.randint(1,20)
+    if mercadoriaselecionada=="Espada Dos Magos":
+        preco=130+random.randint(1,20)
+    if mercadoriaselecionada=="Barra De Ferro ":
+        preco=300+random.randint(1,20)
+    if mercadoriaselecionada=="Esmeralda":
+        preco=900+random.randint(1,200)
+    if mercadoriaselecionada=="Camisão De Malha":
+        preco=105+random.randint(1,50)
+    if mercadoriaselecionada=="Espada Curta":
+        preco=80+random.randint(1,20)
+    if mercadoriaselecionada=="Adaga":
+        preco=15+random.randint(1,10)
+    if mercadoriaselecionada=="Robes Desgastadas":
+        preco=10+random.randint(1,10)
+    if mercadoriaselecionada=="Sobre-Tudo":
+        preco=50+random.randint(1,20)
+    if mercadoriaselecionada=="Adagas Gêmeas":
+        preco=150+random.randint(1,20)
+    if mercadoriaselecionada=="Bolsa De Runas":
+        preco=120+random.randint(1,20)
+    if mercadoriaselecionada=="Varinha De Teixo":
+        preco=55+random.randint(1,30)
+    if mercadoriaselecionada=="Cajado Sagrado":
+        preco=190+random.randint(1,20)
+    if mercadoriaselecionada=="Varinha De Visco":
+        preco=55+random.randint(1,30)
+    if mercadoriaselecionada=="Corda":
+        preco=15+random.randint(1,10)
+    if mercadoriaselecionada=="Cajado":
+        preco=115+random.randint(1,10)
+    if mercadoriaselecionada=="Besta":
+        preco=150+random.randint(1,30)
+    if mercadoriaselecionada=="Espada Larga":
+        preco=150+random.randint(1,20)
+    if mercadoriaselecionada=="Arco":
+        preco=110+random.randint(1,30)
+    if mercadoriaselecionada=="Cota De Malha":
+        preco=120+random.randint(1,30)
+    if mercadoriaselecionada=="Poção De MP":
+        preco=80+random.randint(1,30)
+    if mercadoriaselecionada=="Conjunto De Dados":
+        preco=10+random.randint(1,10)
+    if mercadoriaselecionada=="Picareta":
+        preco=40+random.randint(1,30)
+    if mercadoriaselecionada=="Poção De HP":
+        preco=85+random.randint(1,30)
+    if mercadoriaselecionada=="Machado":
+        preco=40+random.randint(1,30)
+    print("O preço do item",mercadoriaselecionada,"É",preco)
+    if player.dinheiro<preco:
+        print("Você não pode pagar por esse item!")
+    else:
+        teclado=input("Deseja comprar esse item? Sim/Não")
+        teclado=teclado.upper()
+        while (teclado!="SIM" and teclado!="NÃO"):
+            teclado=input("Deseja comprar esse item? Sim/Não")
+            teclado=teclado.upper()
+        if teclado=="SIM":
+            player.dinheiro=player.dinheiro-preco
+            mercadorias.pop(index)
+            obj_inventario.AdicionarItem(player,mercadoriaselecionada)
+        else:
+            RealizarCompraOuFecharLoja(player,mercadorias)
+
+
 
 
 #arquivo com funções que servem para fazer Tudo no RPG que não envolva Cidades,Dungeons,Movimentos,História, Quests,ou Comércio
