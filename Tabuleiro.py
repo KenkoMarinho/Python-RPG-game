@@ -1,5 +1,6 @@
 import os
 import random
+from funcoesrpg import *
 # . espaço vazio, o robo, # pilastra
 
 #funcoes
@@ -88,7 +89,7 @@ def InputAutomatico(tabuleiro):#bagunça e gambiarra, boa sorte pra entender ess
   for i in comandos:
     Controlador(tabuleiro,i)
 
-def GerarObstaculos(tabuleiro):
+def GerarObstaculosNaturais(tabuleiro):
   for i in range (len(tabuleiro)):
     randomizar=random.randint(1,8)
     if randomizar==2:
@@ -107,11 +108,51 @@ def GerarObstaculos(tabuleiro):
       tabuleiro[i][0],tabuleiro[i][1],tabuleiro[i][2],tabuleiro[i][3],tabuleiro[i][4],tabuleiro[i][5],tabuleiro[i][6],tabuleiro[i][7],tabuleiro[i][9],tabuleiro[i][10],tabuleiro[i][13],tabuleiro[i][14]="#","#","#","#","#","#","#","#","#","#","#","#"
   return tabuleiro
 
+def ConferirEvento(tabuleiro,player):
+    randomizar=random.randint(2,5) #vai ter um evento?
+    if randomizar==1 or randomizar==2:
+        randomizar=random.randint(1,20) #tipo de evento
+        if randomizar==1:                           #evento de mercador
+            EventoMercador(player)
+        elif randomizar>=2 and randomizar<=14:      #evento de combate
+            EventoCombate(player)
+        elif randomizar>=15 and randomizar<=18:     #evento de viajante
+            EventoViajante(player)
+        elif randomizar==19:                        #evento de descanso
+            EventoDescanso(player)
+        elif randomizar==20:                        #evento de tesouro
+            EventoTesouro(player)
+
+def EventoMercador(player):            
+    randomizar=random.randint(1,20)
+    if randomizar>=1 and randomizar<=7:
+        Comercio(player,"Padrão")
+    elif randomizar>=8 and randomizar<=12:
+        Comercio(player,"Mercador Aventureiro")
+    elif randomizar>=13 and randomizar<=16:
+        Comercio(player,"Mercador Mago")
+    elif randomizar>=17 and randomizar<=19:
+        Comercio(player,"Goblin Mercador")
+    elif randomizar==20:
+        Comercio(player,"Pequeno Mascate")
+
+def EventoCombate(player):
+    print("Você podia pressentir... Inimigos se aproximando... Conforme você seguia seu caminho.")
+    input("ENTER")
+    GerarInimigo1(0,player)
+
+def EventoViajante(player):
+    print("AINDA A SER FEITO")
+def EventoTesouro(player):
+    print("AINDA A SER FEITO")   #FAZ ESSAS PORRAS AÍ NAMORAL TO CANSADÃO
+def EventoDescanso(player):
+    print("AINDA A SER FEITO")
+
 def EntrarNaDungeon(tabuleiro):
   tabuleiro[random.randint(0,10)][random.randint(0,14)]="o"
   return tabuleiro
 
-def Dungeon_Crawling():
+def Dungeon_Crawling(player): #dimensões: 11(A)x15(L), indices variam de 0 a 10 e de 0 a 14
   tabuleiro=[
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
@@ -124,8 +165,9 @@ def Dungeon_Crawling():
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."]]
-  tabuleiro=GerarObstaculos(tabuleiro)
+  tabuleiro=GerarObstaculosNaturais(tabuleiro)
   tabuleiro=EntrarNaDungeon(tabuleiro)
   while True:
     MostrarTabuleiro(tabuleiro)
     InputAutomatico(tabuleiro)
+    ConferirEvento(tabuleiro,player)
