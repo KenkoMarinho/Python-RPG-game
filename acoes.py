@@ -1,3 +1,4 @@
+
 import obj_personagem
 import obj_inimigo
 import random
@@ -784,5 +785,5 @@ def Drenar_Alma(usuario,alvo):
 def MisseisMagicos(usuario,alvo1,alvo2=alvo1,alvo3=alvo2):
 def RaioFlamejante(usuario,alvo1,alvo2=alvo1,alvo3=alvo2):
 def BeberPocao(usuario):
-def Fugir(usuario):,
+def Fugir(usuario):
 '''
