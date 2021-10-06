@@ -167,7 +167,9 @@ def Dungeon_Crawling(player): #dimensões: 11(A)x15(L), indices variam de 0 a 10
   [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."]]
   tabuleiro=GerarObstaculosNaturais(tabuleiro)
   tabuleiro=EntrarNaDungeon(tabuleiro)
+
   while True:
     MostrarTabuleiro(tabuleiro)
     InputAutomatico(tabuleiro)
     ConferirEvento(tabuleiro,player)
+    #inclui uma condição de parada aqui fazendo o favor? HP=0 ou se o player achar a saída
