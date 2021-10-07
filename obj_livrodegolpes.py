@@ -1,4 +1,6 @@
-from funcoesrpg import cls
+import os
+def cls():
+    os.system('clear')
 
 class objlivrodegolpes:
   def __init__(self,arranhar=False,mordida=False,facada=False,ataqueespada=False,surtodeacao=False,defesaespada=False,frenesi=False,golpeespiral=False):

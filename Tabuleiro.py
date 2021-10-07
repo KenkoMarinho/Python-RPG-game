@@ -114,9 +114,10 @@ def ConferirEvento(tabuleiro,player):
         randomizar=random.randint(1,20) #tipo de evento
         if randomizar==1:                           #evento de mercador
             EventoMercador(player)
-        elif randomizar>=2 and randomizar<=14:      #evento de combate
+        elif randomizar>=2 and randomizar<=16: 
+            print("CHEGUEI AQUI")     #evento de combate
             EventoCombate(player)
-        elif randomizar>=15 and randomizar<=18:     #evento de viajante
+        elif randomizar>=17 and randomizar<=18:     #evento de viajante
             EventoViajante(player)
         elif randomizar==19:                        #evento de descanso
             EventoDescanso(player)
@@ -139,7 +140,7 @@ def EventoMercador(player):
 def EventoCombate(player):
     print("Você podia pressentir... Inimigos se aproximando... Conforme você seguia seu caminho.")
     input("ENTER")
-    GerarInimigo1(0,player)
+    encontro_aleatorio(player)
 
 def EventoViajante(player):
     print("AINDA A SER FEITO")
@@ -152,24 +153,45 @@ def EntrarNaDungeon(tabuleiro):
   tabuleiro[random.randint(0,10)][random.randint(0,14)]="o"
   return tabuleiro
 
-def Dungeon_Crawling(player): #dimensões: 11(A)x15(L), indices variam de 0 a 10 e de 0 a 14
-  tabuleiro=[
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
-  [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."]]
-  tabuleiro=GerarObstaculosNaturais(tabuleiro)
-  tabuleiro=EntrarNaDungeon(tabuleiro)
+def gerar_saida(tabuleiro):
+    x,y=random.randint(0,10),random.randint(0,14)
+    tabuleiro[x][y]="."
+    return x,y,tabuleiro
 
-  while True:
-    MostrarTabuleiro(tabuleiro)
-    InputAutomatico(tabuleiro)
-    ConferirEvento(tabuleiro,player)
+def conferir_saida(saidax,saiday,tabuleiro):
+    xrobo,yrobo=LocalizarRobo(tabuleiro)
+    if xrobo==saidax and yrobo==saiday:
+        return "ACHOU A SAIDA"
+    else:
+        return "NAO ACHOU A SAIDA"
+
+def Dungeon_Crawling(player): #dimensões: 11(A)x15(L), indices variam de 0 a 10 e de 0 a 14
+    tabuleiro=[
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."],
+    [".",".",".",".",".",".",".",".",".",".",".",".",".",".","."]]
+    tabuleiro=GerarObstaculosNaturais(tabuleiro)
+    tabuleiro=EntrarNaDungeon(tabuleiro)
+    saidax,saiday,tabuleiro=gerar_saida(tabuleiro)
+
+    while True:
+        MostrarTabuleiro(tabuleiro)
+        InputAutomatico(tabuleiro)
+        sair=conferir_saida(saidax,saiday,tabuleiro)
+        if sair=="ACHOU A SAIDA":
+            input("Você encontrava a saída da dungeon")
+            break
+        ConferirEvento(tabuleiro,player)
+        
+    if player.HP==0:
+        while True:
+            input("VOCÊ MORREU")
     #inclui uma condição de parada aqui fazendo o favor? HP=0 ou se o player achar a saída

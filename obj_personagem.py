@@ -130,8 +130,8 @@ def resetarValores(personagem):
 
     personagem.MPMax=int(5+(personagem.INT/2))
     personagem.HPMax=9+personagem.CON
-    if personagem.HP==0:
-      personagem.HP=personagem.HPMax
+    #if personagem.HP==0:
+      #personagem.HP=personagem.HPMax
     verificarHP(personagem)
     #criterios de balanceamento do sistema de armas:
     #armas com escalamento BOM devem ter DANO BASE BAIXO, e a soma da média dos atributos pedidos deve ser dividida por 4, armas com escalamento MÉDIO devem ter o resultado da média de seus atributos divididos por 5. armas com escalamento RUIM devem ter dano base alto e ter a média de seus atributos dividida por 8.

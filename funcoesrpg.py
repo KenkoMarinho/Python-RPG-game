@@ -1,10 +1,11 @@
-import obj_adicionais
 import os
 import obj_inimigo
 import obj_personagem
 import acoes
 import random
 import obj_inventario
+import obj_adicionais
+import funcoesrpg
 def cls():
   os.system('clear')
 
@@ -525,16 +526,16 @@ def encontro_aleatorio(player,qntinimigos=0,Inimigo1=0,Inimigo2=0,Inimigo3=0,Ini
   rand=random.randint(1,30)
   if rand>=1 and rand<=15 or qntinimigos==1:
     qntinimigos=1
-    playerhp,playermp,playerexp=combate_random_melhorado(player,qntinimigos,Inimigo1)
+    combate_random_melhorado(player,qntinimigos,Inimigo1)
   elif rand>=16 and rand<=23 or qntinimigos==2:
     qntinimigos=2
-    playerhp,playermp,playerexp=combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2)
+    combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2)
   elif rand>=24 and rand<=27 or qntinimigos==3:
     qntinimigos=3
-    playerhp,playermp,playerexp=combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2,Inimigo3)
+    combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2,Inimigo3)
   elif rand>=28 and rand<=30 or qntinimigos==4:
     qntinimigos=4
-    playerhp,playermp,playerexp=combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2,Inimigo3,Inimigo4)
+    combate_random_melhorado(player,qntinimigos,Inimigo1,Inimigo2,Inimigo3,Inimigo4)
 
 def retonarplayer(player):
   objeto=obj_personagem.objpersonagem(player.nome,player.HP,player.MP,player.HPMax,player.MPMax,player.FOR,player.DES,player.CON,player.INT,player.SAB,player.CAR,player.DanoArma,player.ataquesmagicos,player.Defesa,player.DefesaMagica,player.imunidades,player.expplayer,player.explevelup,player.levelplayer,player.DanoFoco,player.armaelementalativa,player.dinheiro,player.grimorio,player.livrogolpes,player.mochila,player.tipoarmadura,player.tipoarma,player.tipoanel,player.tipoescudo,player.movimento1,player.movimento2,player.movimento3,player.movimento4,player.movimento5,player.movimento6,player.movimento7,player.movimento8,player.armaelementaltipodano)
