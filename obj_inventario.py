@@ -650,7 +650,6 @@ def GerenciarInventario(player):
       Desequiparanel(player)
     input("ENTER")
     os.system('clear')
-    print("chegueiiii")
     GerenciarInventario(player)
   
   if conferirbagarma==False:

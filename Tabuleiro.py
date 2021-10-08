@@ -114,8 +114,7 @@ def ConferirEvento(tabuleiro,player):
         randomizar=random.randint(1,20) #tipo de evento
         if randomizar==1:                           #evento de mercador
             EventoMercador(player)
-        elif randomizar>=2 and randomizar<=16: 
-            print("CHEGUEI AQUI")     #evento de combate
+        elif randomizar>=2 and randomizar<=16:      #evento de combate
             EventoCombate(player)
         elif randomizar>=17 and randomizar<=18:     #evento de viajante
             EventoViajante(player)

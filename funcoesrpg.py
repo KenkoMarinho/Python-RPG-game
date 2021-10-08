@@ -688,7 +688,7 @@ def MostrarMercadorias(mercadorias,comerciante,player):
 
 def RealizarCompraOuFecharLoja(player,mercadorias):
     teclado=input("Digite o Número da mercadoria selecionada, ou aperte ENTER para sair da loja.")
-    while teclado!="" and teclado!=str(len(mercadorias)) and teclado!=str(len(mercadorias)-1) and teclado!=str(len(mercadorias-2)):
+    while teclado!="" and teclado!=str(len(mercadorias)) and teclado!=str(len(mercadorias)-1) and teclado!=str(len(mercadorias)-2):
         teclado=input("Digite o Número da mercadoria selecionada, ou aperte ENTER para sair da loja.")
     if teclado=="1":
         mercadoriaselecionada=mercadorias[0]
@@ -765,13 +765,15 @@ def RealizarCompraOuFecharLoja(player,mercadorias):
     else:
         teclado=input("Deseja comprar esse item? Sim/Não")
         teclado=teclado.upper()
-        while (teclado!="SIM" and teclado!="NÃO"):
+        while teclado!="SIM" and teclado!="NÃO":
             teclado=input("Deseja comprar esse item? Sim/Não")
             teclado=teclado.upper()
         if teclado=="SIM":
             player.dinheiro=player.dinheiro-preco
             mercadorias.pop(index)
             obj_inventario.AdicionarItem(player,mercadoriaselecionada)
+            print("Você comprava o item.")
+            input("ENTER")
         else:
             RealizarCompraOuFecharLoja(player,mercadorias)
 
