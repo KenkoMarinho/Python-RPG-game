@@ -699,8 +699,12 @@ def RealizarCompraOuFecharLoja(player,mercadorias):
     elif teclado=="3":
         mercadoriaselecionada=mercadorias[2]
         index=2
-    elif teclado!="":
-        RealizarCompraOuFecharLoja(player,mercadorias)
+    else:
+        if teclado=="":
+            mercadoriaselecionada=""
+            preco=0
+        else:
+            RealizarCompraOuFecharLoja(player,mercadorias)
     if mercadoriaselecionada=="Diamante":
         preco=4900+random.randint(1,300)
     if mercadoriaselecionada=="Rapieira":
@@ -759,23 +763,25 @@ def RealizarCompraOuFecharLoja(player,mercadorias):
         preco=85+random.randint(1,30)
     if mercadoriaselecionada=="Machado":
         preco=40+random.randint(1,30)
-    print("O preço do item",mercadoriaselecionada,"É",preco)
+    if preco!=0:
+        print("O preço do item",mercadoriaselecionada,"É",preco)
     if player.dinheiro<preco:
         print("Você não pode pagar por esse item!")
     else:
-        teclado=input("Deseja comprar esse item? Sim/Não")
-        teclado=teclado.upper()
-        while teclado!="SIM" and teclado!="NÃO":
+        if preco!=0:
             teclado=input("Deseja comprar esse item? Sim/Não")
             teclado=teclado.upper()
-        if teclado=="SIM":
-            player.dinheiro=player.dinheiro-preco
-            mercadorias.pop(index)
-            obj_inventario.AdicionarItem(player,mercadoriaselecionada)
-            print("Você comprava o item.")
-            input("ENTER")
-        else:
-            RealizarCompraOuFecharLoja(player,mercadorias)
+            while teclado!="SIM" and teclado!="NÃO":
+                teclado=input("Deseja comprar esse item? Sim/Não")
+                teclado=teclado.upper()
+            if teclado=="SIM":
+                player.dinheiro=player.dinheiro-preco
+                mercadorias.pop(index)
+                obj_inventario.AdicionarItem(player,mercadoriaselecionada)
+                print("Você comprava o item.")
+                input("ENTER")
+            else:
+                RealizarCompraOuFecharLoja(player,mercadorias)
 
 
 

@@ -1,6 +1,7 @@
 import os
 import random
 from funcoesrpg import *
+import obj_inventario
 # . espaço vazio, o robo, # pilastra
 
 #funcoes
@@ -50,62 +51,40 @@ def MoverOeste(tabuleiro):
       tabuleiro[indice1robo][indice2robo]=","
       tabuleiro[indice1robo][indice2robo-1]="o"
 
-def Controlador(tabuleiro,x=0):
-  if x==0:
-    Teclado=input("Digite N para Norte, S para Sul, L para Leste e O para Oeste.")
-    while Teclado!="N" and Teclado!="S" and Teclado!="L" and Teclado!="O":
-      Teclado=input("Digite N para Norte, S para Sul, L para Leste e O para Oeste.")
-  else:
-    Teclado=x
+def Controlador(tabuleiro,player):
+    Teclado=input("Insira W/A/S/D ou digite 'Mochila' para abrir seu inventário.")
     Teclado=Teclado.upper()
-  if Teclado=="N":
-    MoverNorte(tabuleiro)
-  if Teclado=="S":
-    MoverSul(tabuleiro)
-  if Teclado=="L":
-    MoverLeste(tabuleiro)
-  if Teclado=="O":
-    MoverOeste(tabuleiro)
-  
-  
-def InputAutomatico(tabuleiro):#bagunça e gambiarra, boa sorte pra entender essa merda aí.
-  comandos2=""
-  comandos=input("Insira os comandos: Ex:W/A/S/D")
-  while len(comandos)!=1 and not(("W" in comandos)or("A" in comandos)or("S" in comandos)or("D" in comandos)):
-    comandos=input("Insira os comandos: Ex:W/A/S/D")
-  for i in range (len(comandos)):
-    if comandos[i]=="w" or comandos[i]=="W":
-      comandos2+="N"
-    if comandos[i]=="a" or comandos[i]=="A":
-      comandos2+="O"
-    if comandos[i]=="s" or comandos[i]=="S":
-      comandos2+=""
-    if comandos[i]=="d" or comandos[i]=="D":
-      comandos2+="L"
-  comandos+=comandos2
-  cls()
-  if len(comandos)>5:
-    comandos=comandos[0:4]
-  for i in comandos:
-    Controlador(tabuleiro,i)
+    while Teclado!="W" and Teclado!="A" and Teclado!="S" and Teclado!="D" and Teclado!="MOCHILA":
+        Teclado=input("Insira W/A/S/D ou digite 'Mochila' para abrir seu inventário.")
+        Teclado=Teclado.upper()
+    if Teclado=="W":
+        MoverNorte(tabuleiro)
+    if Teclado=="S":
+        MoverSul(tabuleiro)
+    if Teclado=="D":
+        MoverLeste(tabuleiro)
+    if Teclado=="A":
+        MoverOeste(tabuleiro)
+    if Teclado=="MOCHILA":
+        obj_inventario.GerenciarInventario(player)
 
 def GerarObstaculosNaturais(tabuleiro):
   for i in range (len(tabuleiro)):
     randomizar=random.randint(1,8)
     if randomizar==2:
-      tabuleiro[i][0],tabuleiro[i][2],tabuleiro[i][3],tabuleiro[i][4],tabuleiro[i][6],tabuleiro[i][7],tabuleiro[i][8],tabuleiro[i][9],tabuleiro[i][14]="#","#","#","#","#","#","#","#","#"
+      tabuleiro[i][0],tabuleiro[i][2],tabuleiro[i][3],tabuleiro[i][4],tabuleiro[i][7],tabuleiro[i][9]="#","#","#","#","#","#"
     if randomizar==3:
       tabuleiro[i][5],tabuleiro[i][6],tabuleiro[i][10],tabuleiro[i][14]="#","#","#","#"
     if randomizar==4:
       tabuleiro[i][2],tabuleiro[i][7],tabuleiro[i][8],tabuleiro[i][10],tabuleiro[i][13]="#","#","#","#","#"
     if randomizar==5:
-      tabuleiro[i][1],tabuleiro[i][2],tabuleiro[i][6],tabuleiro[i][8],tabuleiro[i][9]="#","#","#","#","#"
+      tabuleiro[i][1],tabuleiro[i][2],tabuleiro[i][9]="#","#","#"
     if randomizar==6:
       tabuleiro[i][4],tabuleiro[i][8],tabuleiro[i][13]="#","#","#"
     if randomizar==7:
-      tabuleiro[i][2],tabuleiro[i][3],tabuleiro[i][4],tabuleiro[i][10],tabuleiro[i][11]="#","#","#","#","#"
+      tabuleiro[i][2],tabuleiro[i][4],tabuleiro[i][10],tabuleiro[i][11]="#","#","#","#",
     if randomizar==8:
-      tabuleiro[i][0],tabuleiro[i][1],tabuleiro[i][2],tabuleiro[i][3],tabuleiro[i][4],tabuleiro[i][5],tabuleiro[i][6],tabuleiro[i][7],tabuleiro[i][9],tabuleiro[i][10],tabuleiro[i][13],tabuleiro[i][14]="#","#","#","#","#","#","#","#","#","#","#","#"
+      tabuleiro[i][0],tabuleiro[i][7],tabuleiro[i][9],tabuleiro[i][13],tabuleiro[i][14]="#","#","#","#","#"
   return tabuleiro
 
 def ConferirEvento(tabuleiro,player):
@@ -154,7 +133,7 @@ def EntrarNaDungeon(tabuleiro):
 
 def gerar_saida(tabuleiro):
     x,y=random.randint(0,10),random.randint(0,14)
-    tabuleiro[x][y]="."
+    tabuleiro[x][y]="n"
     return x,y,tabuleiro
 
 def conferir_saida(saidax,saiday,tabuleiro):
@@ -183,10 +162,10 @@ def Dungeon_Crawling(player): #dimensões: 11(A)x15(L), indices variam de 0 a 10
 
     while True:
         MostrarTabuleiro(tabuleiro)
-        InputAutomatico(tabuleiro)
+        Controlador(tabuleiro,player)
         sair=conferir_saida(saidax,saiday,tabuleiro)
         if sair=="ACHOU A SAIDA":
-            input("Você encontrava a saída da dungeon")
+            input("Você encontrava a saída da dungeon, um portal que lhe levava para o lado de fora!")
             break
         ConferirEvento(tabuleiro,player)
         
