@@ -513,6 +513,7 @@ def combate_random_melhorado(player,qntinimigos=0,inimigo1=0,inimigo2=0,inimigo3
     print("Fim de Combate! Você recebeu",exprecebido,"pontos de EXP")
     player.expplayer=int(player.expplayer+exprecebido)
     print("EXP atual:",player.expplayer)
+    input("ENTER")
   playerhp=player.HP
   playermp=player.MP
   playerexp=player.expplayer
