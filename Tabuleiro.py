@@ -228,8 +228,10 @@ def EventoDescanso(player):
         print("Após explorar as ruínas do local, você podia ver um cão latindo pra você, assim que o mesmo")
         print("captara sua atenção, ele corria para entre os prédios abandonados do local")
         Teclado=input("Seguir ele? Sim/Não")
+        Teclado=Teclado.upper()
         while Teclado.upper!=("SIM") and Teclado.upper()!="NÃO":
           Teclado=input("Seguir ele? Sim/Não")
+          Teclado=Teclado.upper()
         Teclado=Teclado.upper()
         cls()
         if Teclado=="SIM":
@@ -309,8 +311,10 @@ def EventoDescanso(player):
         print("A idosa vestia roupas camponesas dos pés a cabeça mantinha um doce e gentil olhar enquanto falava contigo.")
         print("Idosa:--Está perdido? Não tem onde dormir? Se quiser pode passar a noite aqui.")
         Teclado=input("Sim/Não")
+        Teclado=Teclado.upper()
         while Teclado.upper()!="SIM" and Teclado.upper!="NÃO":
           Teclado=input("Sim/Não")
+          Teclado=Teclado.upper()
         Teclado=Teclado.upper()
         cls()
         if Teclado=="SIM":
@@ -331,10 +335,11 @@ def EventoDescanso(player):
         print("Após explorar as ruínas do local, você podia ver um cão latindo pra você, assim que o mesmo")
         print("captara sua atenção, ele corria para entre os prédios abandonados do local")
         Teclado=input("Seguir ele? Sim/Não")
+        Teclado=Teclado.upper()
         while Teclado.upper!=("SIM") and Teclado.upper()!="NÃO":
           Teclado=input("Seguir ele? Sim/Não")
+          Teclado=Teclado.upper()
         cls()
-        Teclado=Teclado.upper()
         if Teclado=="SIM":
           print("Você acompanhava o pobre cão...")
           print("Ele estava sujo e sarnento, ele virava uma esquina nas ruínas, e assim que você o segue...")
@@ -373,8 +378,11 @@ def EntrarNaDungeon(tabuleiro):
 
 def gerar_saida(tabuleiro):
     x,y=random.randint(0,10),random.randint(0,14)
-    tabuleiro[x][y]="n"
-    return x,y,tabuleiro
+    if tabuleiro[x][y]=="." or tabuleiro[x][y]=="#":
+      tabuleiro[x][y]="n"
+      return x,y,tabuleiro
+    else:
+      gerar_saida(tabuleiro)
 
 def conferir_saida(saidax,saiday,tabuleiro):
     xrobo,yrobo=LocalizarRobo(tabuleiro)

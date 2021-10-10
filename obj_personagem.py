@@ -189,7 +189,8 @@ def resetarValores(personagem):
 def pointbuy(objeto):
     pontos=0
     if objeto.FOR==0 and objeto.DES==0 and objeto.CON==0 and objeto.INT==0 and objeto.SAB==0 and objeto.CAR==0:
-      pontos=20
+      pontos=25
+      pontosiniciais=pontos
     confirma=False
     if objeto.nome=="":
       objeto.nome=input("Digite o Nome do seu personagem: ")
@@ -250,8 +251,8 @@ def pointbuy(objeto):
     pontos=pontos-aux_car
     print(f"Você ainda tem {pontos} pontos")
     #valida a soma dos atbs e compara com a quantidade de pontos
-    if (aux_for+aux_des+aux_con+aux_int+aux_sab+aux_car)!=20:
-      print("A soma dos atributos não dá 20! O processo será repetido.")
+    if (aux_for+aux_des+aux_con+aux_int+aux_sab+aux_car)!=pontosiniciais:
+      print(f"A soma dos atributos não dá {pontosiniciais}! O processo será repetido.")
       pointbuy(objeto)
     #Pergunta se quer repetir
     repetir=input("Deseja distribuir os pontos novamente? 1-Sim 2-Não")
