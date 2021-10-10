@@ -9,7 +9,7 @@ import funcoesrpg
 def cls():
   os.system('clear')
 
-def GerarInimigo1(inimigoselecionado=0):
+def GerarInimigo1(inimigoselecionado=0,objplayer=0):
     randomizar=random.randint(1,11)
     if inimigoselecionado!=0:
       if inimigoselecionado=="Zumbi":

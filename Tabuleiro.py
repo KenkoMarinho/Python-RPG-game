@@ -402,13 +402,12 @@ def Dungeon_Crawling(player): #dimensões: 11(A)x15(L), indices variam de 0 a 10
 
     while True:
         MostrarTabuleiro(tabuleiro)
+        if player.HP<0:
+          while True:
+            input("Você Morreu!")
         Controlador(tabuleiro,player)
         sair=conferir_saida(saidax,saiday,tabuleiro)
         if sair=="ACHOU A SAIDA":
             input("Você encontrava a saída da dungeon, um portal que lhe levava para o lado de fora!")
             break
         ConferirEvento(tabuleiro,player)
-        
-    if player.HP==0:
-        while True:
-            input("VOCÊ MORREU")
