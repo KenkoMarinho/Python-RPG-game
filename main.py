@@ -8,7 +8,6 @@ import CasaHorrores
 from Tabuleiro import *
 from funcoesrpg import *
 from obj_livrodegolpes import *
-
 Player=objpersonagem("",0,0,0,0,0,0,0,0,0,0,0,False,0,0,0,0,300,1,0,False,1100,objgrimorio(True,False,False,False,False,True,True,True,False,False),objlivrodegolpes(False,False,False,True,True,True,True,True),objinventario(3,1,"Sobre-Tudo","Espada Curta","Cajado"),0,0,0,0,0,0,0,0,0,0,0,0)
 
 pointbuy(Player)

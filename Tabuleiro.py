@@ -120,10 +120,51 @@ def EventoCombate(player):
     input("ENTER")
     encontro_aleatorio(player)
 
-def EventoViajante(player):
+def EventoViajante(player):  #FAZ ESSAS PORRAS AÍ NAMORAL TO CANSADÃO
     print("AINDA A SER FEITO")
+
 def EventoTesouro(player):
-    print("AINDA A SER FEITO")   #FAZ ESSAS PORRAS AÍ NAMORAL TO CANSADÃO
+  rand=random.randint(1,3)  
+  if rand<3: #Baú Benigno
+    print("Seguindo seu caminho por ruínas, florestas, e masmorras, eventualmente você dava de cara")
+    print("com um baú fechado, você podia perceber sua fechadura quebrada, pronto para ser aberto.")
+    teclado=input("Deseja Abrir? Sim/Não")
+    teclado=teclado.upper()
+    while teclado!="SIM" and teclado!="NÃO":
+      teclado=input("Deseja Abrir? Sim/Não")
+      teclado=teclado.upper()
+    if teclado=="SIM":
+      recompensas=["Espada Larga","Espada Curta","Adagas Gêmeas","Cajado","Rapieira","Cajado Sagrado","Sobre-Tudo","Camisão de Malha","Cota de Malha","Armadura de Couro","Robes Desgastadas","Espada Dos Magos","Bolsa De Runas","Espada Longa","Varinha De Teixo","Varinha De Visco"]
+      recompensasdinheiro=random.randint(5,40)
+      indexrecompensa=random.randint(0,(len(recompensas)-1))
+      recompensafinal=recompensas[indexrecompensa]
+      print("Você abria o baú, e dentro dele você encontrava...")
+      print(recompensasdinheiro,"Moedas de Ouro")
+      print(recompensafinal)
+      input("ENTER")
+      player.dinheiro+=recompensasdinheiro
+      obj_inventario.AdicionarItem(player,recompensafinal)
+      cls()
+  if rand==3: #Bau Mimico
+    print("Seguindo seu caminho por ruínas, florestas, e masmorras, eventualmente você dava de cara")
+    print("com um baú fechado, você podia perceber sua fechadura quebrada, pronto para ser aberto.")
+    teclado=input("Deseja Abrir? Sim/Não")
+    teclado=teclado.upper()
+    while teclado!="SIM" and teclado!="NÃO":
+      teclado=input("Deseja Abrir? Sim/Não")
+      teclado=teclado.upper()
+    if teclado=="SIM":
+      print("Assim que você encostava na tranca do baú para abrir-lo, o mesmo se abria bruscamente, tentando")
+      print("Devorar sua mão!, você conseguia rapidamente repelir o ataque, e saltar para trás, se preparando")
+      print("para o combate.")
+      input("ENTER")
+      cls()
+      combate_random_melhorado(player,1,"Mímico")
+      if player.HP>0:
+        print("Entre os destroços do baú, você encontrava alguns trocados.")
+        moedas=random.randint(7,15)
+        print("Você encontrou",moedas,"moedas de ouro.")
+        player.dinheiro+=moedas
 
 def EventoDescanso(player):
     if random.randint(1,2)==1: #evento positivo
@@ -325,8 +366,6 @@ def EventoDescanso(player):
               print(f"{player.nome}--Nunca mais eu ajudo cães de rua, anotado.")
         else:
           print("Você virava suas costas para o cão, e voltava a seguir seu caminho para fora das ruínas.")
-      
-
 
 def EntrarNaDungeon(tabuleiro):
   tabuleiro[random.randint(0,10)][random.randint(0,14)]="o"
